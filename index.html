@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <h1>National Parks Search!</h1>
+      <h3>Type in the 2 digit state code(OR, CA, NY, etc.) and the maximum number of parks that you would like to see below!</h3>
+
+    <form>
+      <label for="state-code">2 digit state code:</label>
+    <input type="text" id="stateCode" name="state-code" >
+   <br>
+   <label for="search-val">Max number of results:</label>
+    <input type="text" id="searchVal" value="10" name="search-val">
+    <input type="submit" id="searchValButt" name="search-val">
+
+    </form>
+
+    <ul class="list">
+    </ul>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
