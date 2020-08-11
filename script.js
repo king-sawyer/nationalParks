@@ -38,7 +38,6 @@ function searchForParks(max, code){
 const resultQuery = formatQueryParams(params);
 const url = searchUrl + resultQuery;
 
-//fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${code}&limit=${max}&api_key=Uv8LQEZgoiYEDcaiDOsGHTUxPa98tKNPoifxPZHX`)
 fetch(url)
 .then(response => response.json())
 .then(data => updateDOM(data, max))
