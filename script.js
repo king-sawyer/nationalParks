@@ -1,18 +1,45 @@
+"use strict"
+
+const searchUrl = "https://developer.nps.gov/api/v1/parks?"
+const key = "Uv8LQEZgoiYEDcaiDOsGHTUxPa98tKNPoifxPZHX"
+
 //this function waits for the user to click submit
 function waitForClick(){
 
   $('#searchValButt').on('click', e=>{
+
+      $('#hiddenClass').removeClass("hidden");
+
     const max = $('#searchVal').val();
     const code = $('#stateCode').val();
     event.preventDefault();
-    searchForParks(code, max);
-  })
+    searchForParks(max, code)  })
+}
+
+function formatQueryParams(params){
+
+const queryItems = Object.keys(params)
+    .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+  return queryItems.join('&');
+
 }
 
 
 //this funciton uses fetch to find parks in the state
-function searchForParks(code, max){
-fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${code}&limit=${max}&api_key=Uv8LQEZgoiYEDcaiDOsGHTUxPa98tKNPoifxPZHX`)
+function searchForParks(max, code){
+
+  const params = {
+  api_key: key,
+  stateCode: code,
+  limit: max
+
+}
+
+const resultQuery = formatQueryParams(params);
+const url = searchUrl + resultQuery;
+
+//fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${code}&limit=${max}&api_key=Uv8LQEZgoiYEDcaiDOsGHTUxPa98tKNPoifxPZHX`)
+fetch(url)
 .then(response => response.json())
 .then(data => updateDOM(data, max))
 .catch(err => {
@@ -23,6 +50,7 @@ fetch(`https://developer.nps.gov/api/v1/parks?stateCode=${code}&limit=${max}&api
 
 function updateDOM(data, max){
   console.log(data);
+
   $('.list').html(" ")
 for(let i=0;i<data.total & i<max;i++){
   $('.list').append(`
